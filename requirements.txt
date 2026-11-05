@@ -1,0 +1,7 @@
+# Installed by setup_env.ps1 AFTER torch (torch itself comes from the CUDA wheel index).
+# Version ranges are loose on purpose; the exact versions that actually got
+# installed are frozen into requirements_lock_<machine>.txt by the setup script.
+numpy>=1.26
+psutil>=5.9
+tqdm>=4.66
+pytest>=8.0

@@ -1,0 +1,31 @@
+# Environment
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/*
+!.vscode/settings.json
+
+# Weights and big data (back these up to the SSD instead)
+*.pt
+*.pth
+*.safetensors
+*.ckpt
+*.bin
+data/raw/
+data/cleaned/
+data/tokens/
+data/*.txt
+runs/*/
+checkpoints/
+
+# Keep small evidence files
+!runs/env_check_*.json
+!data/glossary.csv
+!data/synonyms.csv
+!data/patterns.csv
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
