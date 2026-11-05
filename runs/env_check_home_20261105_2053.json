@@ -1,0 +1,105 @@
+{
+  "machine": "home",
+  "timestamp": "2026-11-05 20:53",
+  "system": {
+    "python": "3.11.6",
+    "python_executable": "C:\\Users\\Merrick\\Desktop\\llm_home\\.venv\\Scripts\\python.exe",
+    "in_venv": true,
+    "os": "Windows 10 (10.0.26300)",
+    "machine_arch": "AMD64",
+    "cpu_count": 16,
+    "stdout_encoding": "utf-8",
+    "disk_free_gb": 564.31,
+    "repo_root": "C:\\Users\\Merrick\\Desktop\\llm_home",
+    "ram_total_gb": 31.63,
+    "ram_available_gb": 15.67
+  },
+  "packages": {
+    "torch": "2.15.0+cu132",
+    "numpy": "2.4.6",
+    "psutil": "7.2.2",
+    "tqdm": "4.70.1",
+    "pytest": "9.2.0"
+  },
+  "nvidia_smi": {
+    "nvidia_smi": "NVIDIA GeForce RTX 4060 Laptop GPU, 610.47, 8188 MiB"
+  },
+  "network": {
+    "pypi": {
+      "ok": true,
+      "status": 200,
+      "seconds": 0.07
+    },
+    "pytorch_wheels": {
+      "ok": true,
+      "status": 200,
+      "seconds": 0.26
+    },
+    "github": {
+      "ok": true,
+      "status": 200,
+      "seconds": 0.09
+    }
+  },
+  "torch": {
+    "importable": true,
+    "version": "2.15.0+cu132",
+    "cuda_build": "13.2",
+    "cuda_available": true,
+    "device_count": 1,
+    "gpu_name": "NVIDIA GeForce RTX 4060 Laptop GPU",
+    "compute_capability": "8.9",
+    "sm_count": 24,
+    "vram_total_gb": 8.0,
+    "vram_free_gb": 6.94,
+    "native_bf16": true,
+    "bf16_reported_supported": true,
+    "recommended_precision": "bf16 (no scaler)"
+  },
+  "matmul": {
+    "float32": {
+      "ms_per_matmul": 22.384,
+      "tflops": 6.14
+    },
+    "float16": {
+      "ms_per_matmul": 5.585,
+      "tflops": 24.61
+    },
+    "bfloat16": {
+      "ms_per_matmul": 5.427,
+      "tflops": 25.32
+    }
+  },
+  "vram_probe": {
+    "usable_vram_gb": 6.92,
+    "free_before_probe_gb": 6.92,
+    "allocated_in_probe_gb": 8.0,
+    "total_vram_gb": 8.0,
+    "system_memory_spill_suspected": true
+  },
+  "amp": [
+    {
+      "dtype": "float16",
+      "scaler": true,
+      "first_loss": 1.0505,
+      "last_loss": 0.0367,
+      "passed": true
+    },
+    {
+      "dtype": "bfloat16",
+      "scaler": false,
+      "first_loss": 1.0505,
+      "last_loss": 0.0367,
+      "passed": true
+    }
+  ],
+  "checks": {
+    "python_3_10_plus": true,
+    "running_in_venv": true,
+    "torch_importable": true,
+    "cuda_available": true,
+    "fp16_amp_ok": true,
+    "utf8_roundtrip": true
+  },
+  "overall_pass": true
+}
