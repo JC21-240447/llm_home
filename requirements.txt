@@ -1,7 +1,10 @@
 # Installed by setup_env.ps1 AFTER torch (torch itself comes from the CUDA wheel index).
 # Version ranges are loose on purpose; the exact versions that actually got
-# installed are frozen into requirements_lock_<machine>.txt by the setup script.
+# installed are frozen into requirements_lock_<machine>.txt.
 numpy>=1.26
 psutil>=5.9
 tqdm>=4.66
 pytest>=8.0
+# Day 4: the team's question generator reads DB.xlsx with pandas (openpyxl reads .xlsx files)
+pandas>=2.2
+openpyxl>=3.1

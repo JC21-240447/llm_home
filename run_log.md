@@ -22,3 +22,13 @@ Report only what is written here.
 - Network: pypi=ok, pytorch_wheels=ok, github=ok
 - UTF-8 Japanese round trip: PASS
 - Overall: PASS (details: runs/env_check_home_20261105_2053.json)
+
+## 2026-11-06 19:10 | home | Day 4 question generation
+
+- Machine label: home (CPU only; no GPU used)
+- Generator: data/source/make_questions.py (team), run by scripts/day4_generate_corpus.py (day4-v1)
+- Settings: max 2000 per pattern, seed 42; time 2.7 s
+- Result: 169,727 questions, 60 types, 300 patterns with questions, avg 23.51 chars
+- Identical to the team's corpus: yes
+- Output folder: runs/day4_generation/20261106_191020
+- Checks: PASS

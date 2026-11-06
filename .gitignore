@@ -19,11 +19,15 @@ data/*.txt
 runs/*/
 checkpoints/
 
+# Day 5: generated corpus files (rebuild with scripts/day5_build_corpus.py; hashes are in data/splits/)
+data/corpus/
+# The team's corpus is kept only as the zip; an unzipped copy is not committed
+data/source/questions.csv
+# Files the team's generator writes when it is run inside data/source
+data/source/__pycache__/
+
 # Keep small evidence files
 !runs/env_check_*.json
-!data/glossary.csv
-!data/synonyms.csv
-!data/patterns.csv
 
 # OS
 Thumbs.db
