@@ -32,3 +32,13 @@ Report only what is written here.
 - Identical to the team's corpus: yes
 - Output folder: runs/day4_generation/20261106_191020
 - Checks: PASS
+
+## 2026-11-06 19:52 | home | Day 3 question generation
+
+- Machine label: home (CPU only; no GPU used)
+- Generator: data/source/make_questions.py (team), run by scripts/day3_generate_questions.py (day3-v1)
+- Settings: max 2000 per pattern, seed 42; generation time 2.7 s
+- Result: 169,727 questions, 60 types, 300 patterns with questions, avg 23.51 chars
+- questions.csv SHA-256: d9ff2a6a6708f4af81ba3cf8c7db17d88d4112c4e823906f4853ebd1d6d62586
+- Output: runs/day3_generation/20261106_195246/ (zip for the other PC: questions_corpus_home_20261106_195246.zip)
+- Checks: PASS

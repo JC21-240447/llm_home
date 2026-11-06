@@ -15,8 +15,9 @@ This script runs that generator the safe and repeatable way:
 3. Runs the generator there with a fixed seed and a per-pattern limit.
 4. Checks the result: header, no duplicates, no broken sentences, readable
    labels, 60 question types, sentence lengths.
-5. Compares the result with the team's corpus (data/source/questions_corpus.zip)
-   and with the team's patterns.csv / question_types.csv / columns.csv:
+5. Compares the result with a reference corpus: the team's
+   data/source/questions_corpus.zip by default, or the zip made by Day 3 on
+   another PC (--reference path\to\zip), and with the team's patterns.csv / question_types.csv / columns.csv:
    byte-identical or not, and which patterns differ.
 6. Writes docs/DAY4_GENERATION_REPORT.md and a run_log.md entry.
 
@@ -42,7 +43,8 @@ SCHOOL-PC SWAP NOTE:
 3. 固定したシードと、文型ごとの上限を指定して、そこで生成プログラムを実行する。
 4. 結果を検査する: ヘッダー、重複なし、壊れた文なし、ラベルが読める、
    質問タイプが60、文の長さ。
-5. 結果をチームのコーパス(data/source/questions_corpus.zip)や、チームの
+5. 結果を基準のコーパス(既定はチームの data/source/questions_corpus.zip。
+   --reference で別のPCの Day 3 の zip も指定できる)や、チームの
    patterns.csv / question_types.csv / columns.csv と比べる:
    1バイトも違わないか、違うならどの文型か。
 6. docs/DAY4_GENERATION_REPORT.md を書き、run_log.md に追記する。
@@ -74,7 +76,7 @@ from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 
-SCRIPT_VERSION: str = "day4-v1"
+SCRIPT_VERSION: str = "day4-v2"
 REPO_ROOT: Path = Path(__file__).resolve().parent.parent
 GENERATOR: str = "make_questions.py"
 REQUIRED_INPUTS: tuple[str, ...] = (GENERATOR, "用語集.csv", "同義語辞書.csv", "DB.xlsx")
@@ -257,6 +259,7 @@ def write_report(
     seed: int,
     seconds: float,
     generator_out: str,
+    reference_name: str,
 ) -> None:
     """docs/DAY4_GENERATION_REPORT.md. Shows questions only, not the internal labels."""
     gen_count = Counter(r[1] for r in corpus.rows)
@@ -310,13 +313,13 @@ def write_report(
     ]
     if cmp_team.get("available"):
         lines += [
-            f"- Compared with the team's corpus (`questions_corpus.zip`, {cmp_team['team_questions']:,} questions):",
+            f"- Compared with the reference corpus (`{reference_name}`, {cmp_team['team_questions']:,} questions):",
             f"  byte-identical: **{'yes' if cmp_team['byte_identical'] else 'no'}**;"
             f" identical patterns: {cmp_team['patterns_identical']};"
             f" differing patterns: {', '.join(cmp_team['patterns_differing']) or 'none'}.",
         ]
     else:
-        lines.append("- The team's corpus was not found, so no comparison was made.")
+        lines.append("- The reference corpus was not found, so no comparison was made.")
     lines += [f"- `{n}` compared with the team's copy: {v}." for n, v in cmp_files.items()]
     lines += [
         "",
@@ -340,7 +343,7 @@ def write_report(
 
 
 def append_run_log(log: Path, machine: str, stats: dict[str, object], cmp_team: dict[str, object],
-                   per_pattern: int, seed: int, seconds: float, work_rel: str) -> None:
+                   per_pattern: int, seed: int, seconds: float, work_rel: str, reference_name: str) -> None:
     same = "n/a" if not cmp_team.get("available") else ("yes" if cmp_team["byte_identical"] else
                                                         f"no ({len(cmp_team['patterns_differing'])} patterns differ)")
     entry = [
@@ -352,7 +355,7 @@ def append_run_log(log: Path, machine: str, stats: dict[str, object], cmp_team: 
         f"- Settings: max {per_pattern} per pattern, seed {seed}; time {seconds:.1f} s",
         f"- Result: {stats['questions']:,} questions, {stats['types']} types, "
         f"{stats['patterns_with_questions']} patterns with questions, avg {stats['avg_chars']} chars",
-        f"- Identical to the team's corpus: {same}",
+        f"- Identical to the reference corpus ({reference_name}): {same}",
         f"- Output folder: {work_rel}",
         "- Checks: PASS",
         "",
@@ -367,7 +370,9 @@ def parse_args() -> argparse.Namespace:
     ap.add_argument("--machine", choices=["school", "home"], required=True)
     ap.add_argument("--source-dir", type=Path, default=REPO_ROOT / "data/source")
     ap.add_argument("--work-root", type=Path, default=REPO_ROOT / "runs/day4_generation")
-    ap.add_argument("--team-corpus", type=Path, default=REPO_ROOT / "data/source/questions_corpus.zip")
+    ap.add_argument("--team-corpus", "--reference", dest="team_corpus", type=Path,
+                    default=REPO_ROOT / "data/source/questions_corpus.zip",
+                    help="corpus to compare with: the team's zip (default) or a Day 3 zip from another PC")
     ap.add_argument("--report", type=Path, default=REPO_ROOT / "docs/DAY4_GENERATION_REPORT.md")
     ap.add_argument("--run-log", type=Path, default=REPO_ROOT / "run_log.md")
     ap.add_argument("--per-pattern", type=int, default=2000, help="max questions per pattern (team setting: 2000)")
@@ -402,7 +407,7 @@ def main() -> int:
     inputs = {f.name: sha256_file(f) for f in [*(a.source_dir / n for n in REQUIRED_INPUTS), *src_files]}
     a.report.parent.mkdir(parents=True, exist_ok=True)
     write_report(a.report, stats, cmp_team, cmp_files, load_pattern_table(work), corpus, inputs,
-                 a.per_pattern, a.seed, seconds, generator_out)
+                 a.per_pattern, a.seed, seconds, generator_out, a.team_corpus.name)
     (work / "check_result.json").write_text(
         json.dumps({"stats": stats, "compare_team": cmp_team, "compare_files": cmp_files,
                     "questions_csv_sha256": sha256_bytes(corpus.raw_bytes)}, ensure_ascii=False, indent=2),
@@ -413,7 +418,7 @@ def main() -> int:
           f"patterns with questions: {stats['patterns_with_questions']} | avg chars: {stats['avg_chars']}")
     print("Corpus check: PASS (no duplicates, no broken sentences, labels readable)")
     if cmp_team.get("available"):
-        print(f"Same as the team's corpus: byte-identical={cmp_team['byte_identical']}, "
+        print(f"Same as the reference corpus ({a.team_corpus.name}): byte-identical={cmp_team['byte_identical']}, "
               f"identical patterns={cmp_team['patterns_identical']}, "
               f"differing patterns={cmp_team['patterns_differing'] or 'none'}")
     for n, v in cmp_files.items():
@@ -421,7 +426,8 @@ def main() -> int:
     print(f"Report: {a.report}")
     if not a.no_log:
         work_rel = str(work.relative_to(REPO_ROOT)).replace("\\", "/")
-        append_run_log(a.run_log, a.machine, stats, cmp_team, a.per_pattern, a.seed, seconds, work_rel)
+        append_run_log(a.run_log, a.machine, stats, cmp_team, a.per_pattern, a.seed, seconds, work_rel,
+                       a.team_corpus.name)
         print(f"Appended an entry to {a.run_log.name}")
     return 0
 
