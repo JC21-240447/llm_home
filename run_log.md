@@ -53,3 +53,21 @@ Report only what is written here.
 - test: 4,553 lines (4,553 unique), 109,720 chars, token bounds 51,015 to 320,290
 - Manifest: data/splits/split_manifest.json
 - Result: PASS
+
+## 2026-11-08 17:49 | home | Day 6 tokenizer
+
+- Machine label: home (CPU only; no GPU used)
+- Script: scripts/day6_train_bpe.py (day6-v1); Python 3.11.6
+- Training: 743 unique pieces, 1,314 merges, 0.9 s, largest vocabulary 1,674
+- Chosen vocabulary: 1,674; validation 47,123 tokens (0.491 per char); key terms 1-3 tokens 232/232; longest question 25 tokens
+- tokenizer.json SHA-256: 4468c3ab991bfbdd1ee6673f0b945a364b8419062be5c50bb5755a48c6e93570
+- Checks: reload PASS, round trip PASS
+
+## 2026-11-08 17:55 | home | Day 6 tokenizer
+
+- Machine label: home (CPU only; no GPU used)
+- Script: scripts/day6_train_bpe.py (day6-v1); Python 3.11.6
+- Training: 743 unique pieces, 1,314 merges, 0.9 s, largest vocabulary 1,674
+- Chosen vocabulary: 1,674; validation 47,123 tokens (0.491 per char); key terms 1-3 tokens 232/232; longest question 25 tokens
+- tokenizer.json SHA-256: 53b03761cd1b614972e1b9bfd63d0a66287d6fd069cd0a9fd91419ec249ca94b
+- Checks: reload PASS, round trip PASS

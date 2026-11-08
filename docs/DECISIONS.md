@@ -32,3 +32,14 @@
 - Held-out patterns are capped at 500 questions; lines over the cap are dropped, not moved to train.
 - Small types are repeated in train only (up to about 200 lines, at most 5 copies). Seed 42.
 - P171 has no questions: all its sentences are identical to P026 sentences. Open question for the team.
+  All training text is made by the team's own generator from the team's own files; see `docs/DATA_CARD.md`.
+
+## D6. Tokenizer (Day 6)
+
+- Own byte-level BPE with a script-class pre-tokenizer (digits and punctuation always single pieces). No tokenizer library.
+- Fixed IDs: <pad></pad>=0, <bos></bos>=1, <eos></eos>=2, <unk></unk>=3, <unused_0..99>=4-103, bytes=104-359, merges from 360.
+- Vocabulary 1,674 instead of the planned ~16,000: the training text has only 743 unique pieces, so training stops
+  after 1,314 merges. Chosen by a written rule (all achievable key terms 1-3 tokens, validation within 5% of the
+  largest size); see docs/DAY6_TOKENIZER_REPORT.md.
+- Evidence for later: the longest question is 25 tokens (27 with <bos></bos>/<eos></eos>). The context length is decided later.
+- Trained only on train.txt; validation used only for measuring.
