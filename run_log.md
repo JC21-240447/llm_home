@@ -42,3 +42,14 @@ Report only what is written here.
 - questions.csv SHA-256: d9ff2a6a6708f4af81ba3cf8c7db17d88d4112c4e823906f4853ebd1d6d62586
 - Output: runs/day3_generation/20261106_195246/ (zip for the other PC: questions_corpus_home_20261106_195246.zip)
 - Checks: PASS
+
+## 2026-11-08 17:15 | home | Day 5 corpus split
+
+- Machine label: home (CPU only; no GPU used)
+- Script: scripts/day5_build_corpus.py (day5-v1), seed 42
+- Held-out patterns: validation 21, test 21 (split by pattern, not by line)
+- train: 148,860 lines (147,317 unique), 3,482,192 chars, token bounds 1,646,022 to 10,126,458
+- val: 4,517 lines (4,517 unique), 95,987 chars, token bounds 42,388 to 279,399
+- test: 4,553 lines (4,553 unique), 109,720 chars, token bounds 51,015 to 320,290
+- Manifest: data/splits/split_manifest.json
+- Result: PASS
