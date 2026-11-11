@@ -71,3 +71,13 @@ Report only what is written here.
 - Chosen vocabulary: 1,674; validation 47,123 tokens (0.491 per char); key terms 1-3 tokens 232/232; longest question 25 tokens
 - tokenizer.json SHA-256: 53b03761cd1b614972e1b9bfd63d0a66287d6fd069cd0a9fd91419ec249ca94b
 - Checks: reload PASS, round trip PASS
+
+## 2026-11-11 18:09 | home | Day 7 encode corpus
+
+- Machine label: home (CPU only; no GPU used)
+- Script: scripts/day7_encode_corpus.py (day7-v1); Python 3.11.6
+- Tokenizer SHA-256: 53b03761cd1b614972e1b9bfd63d0a66287d6fd069cd0a9fd91419ec249ca94b
+- train: 148,860 questions, 2,028,601 tokens (avg 13.6, max 28), SHA-256 2c95990940ea0118ea67c524477e30e02afd693d9e4472b4b758a2c4140e8fdd
+- val: 4,517 questions, 56,157 tokens (avg 12.4, max 22), SHA-256 e39257300d284db7f8b0f373e10ebbb7e2e32aa1346a7d00be52e9afbbeae1bf
+- test: 4,553 questions, 63,877 tokens (avg 14.0, max 25), SHA-256 ec593af0f94a889011546bd94deea12a4ff8689131587a6848432d97ce4f534b
+- Checks: round trip PASS on every question and tricky text; disk read-back PASS

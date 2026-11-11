@@ -43,3 +43,10 @@
   largest size); see docs/DAY6_TOKENIZER_REPORT.md.
 - Evidence for later: the longest question is 25 tokens (27 with <bos></bos>/<eos></eos>). The context length is decided later.
 - Trained only on train.txt; validation used only for measuring.
+
+## D7. Token files (Day 7)
+
+- Each split is one uint16 stream (<bos></bos> question <eos></eos> ...), little-endian, in data/tokens/, with offsets and a meta file
+  holding the vocabulary size and the tokenizer SHA-256 (training refuses a mismatched file).
+- Real size: train 2,028,601 tokens; average question 13.6 tokens, longest 28 (with <bos></bos>/<eos></eos>).
+- Round trip verified on every question and on the files read back from disk.
