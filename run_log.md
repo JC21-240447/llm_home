@@ -81,3 +81,12 @@ Report only what is written here.
 - val: 4,517 questions, 56,157 tokens (avg 12.4, max 22), SHA-256 e39257300d284db7f8b0f373e10ebbb7e2e32aa1346a7d00be52e9afbbeae1bf
 - test: 4,553 questions, 63,877 tokens (avg 14.0, max 25), SHA-256 ec593af0f94a889011546bd94deea12a4ff8689131587a6848432d97ce4f534b
 - Checks: round trip PASS on every question and tricky text; disk read-back PASS
+
+## 2026-11-11 22:18 | home | Day 8 model check
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision for timing: bf16
+- Script: scripts/day8_model_check.py (day8-v1); PyTorch 2.15.0+cu132; Python 3.11.6
+- tiny: 1,001,856 parameters, 12.5 ms/step, 655,031 tokens/s, peak GPU memory 400 MB
+- small: 5,150,464 parameters, 33.4 ms/step, 244,963 tokens/s, peak GPU memory 834 MB
+- medium: 14,805,120 parameters, 81.3 ms/step, 100,732 tokens/s, peak GPU memory 1,513 MB
+- Checks: initial loss 7.420; manual vs fast attention max diff 9.54e-07; memorise one batch 7.424 -> 0.0032
