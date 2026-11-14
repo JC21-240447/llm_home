@@ -1,0 +1,16 @@
+# Day 10 prompts: one beginning per line. Lines starting with # are ignored.
+# Company beginnings (all occur at the start of training questions)
+営業部の
+開発部の
+大阪支社で
+東京本社の
+ボーナスが
+賞与が
+年収が
+勤続年数が
+課長の
+# Harder: never the start of a training question
+社員の平均
+# Out of scope (school plan example): never in the training questions
+今日は
+天気が

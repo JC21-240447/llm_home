@@ -132,3 +132,9 @@ Report only what is written here.
 - Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
 - Run: runs/day9/smoke_c; model config configs/model_tiny.json; resumed
 - Step 3000 of 3000 (finished); best validation loss 2.6747; total training time 44 s
+
+## 2026-11-14 19:27 | home | Day 10 generation report
+
+- Script: scripts/day10_generate.py (day10-v1); device NVIDIA GeForce RTX 4060 Laptop GPU; PyTorch 2.15.0+cu132
+- Run runs/day9/smoke_a: best.pt step 200, last.pt step 600
+- Prompts: prompts/day10_prompts.txt (12); settings: greedy, greedy+limits, sample, sample-hot; report docs/DAY10_GENERATION_REPORT.md
