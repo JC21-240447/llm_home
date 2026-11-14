@@ -8,3 +8,5 @@ pytest>=8.0
 # Day 4: the team's question generator reads DB.xlsx with pandas (openpyxl reads .xlsx files)
 pandas>=2.2
 openpyxl>=3.1
+# Day 9: loss-curve figures (scripts/day9_compare_runs.py)
+matplotlib>=3.8

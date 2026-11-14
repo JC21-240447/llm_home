@@ -90,3 +90,45 @@ Report only what is written here.
 - small: 5,150,464 parameters, 33.4 ms/step, 244,963 tokens/s, peak GPU memory 834 MB
 - medium: 14,805,120 parameters, 81.3 ms/step, 100,732 tokens/s, peak GPU memory 1,513 MB
 - Checks: initial loss 7.420; manual vs fast attention max diff 9.54e-07; memorise one batch 7.424 -> 0.0032
+
+## 2026-11-14 18:38 | home | Day 9 train smoke_a
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_a; model config configs/model_tiny.json; new run
+- Step 600 of 600 (finished); best validation loss 2.6728; total training time 10 s
+
+## 2026-11-14 18:39 | home | Day 9 train smoke_b
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_b; model config configs/model_tiny.json; new run
+- Step 300 of 600 (stopped early (resume later)); best validation loss 2.6728; total training time 5 s
+
+## 2026-11-14 18:39 | home | Day 9 train smoke_b
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_b; model config configs/model_tiny.json; resumed
+- Step 600 of 600 (finished); best validation loss 2.6728; total training time 10 s
+
+## 2026-11-14 18:41 | home | Day 9 train smoke_c
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_c; model config configs/model_tiny.json; new run
+- Step 1151 of 3000 (stopped early (resume later)); best validation loss 2.6747; total training time 17 s
+
+## 2026-11-14 18:41 | home | Day 9 train smoke_c
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_c; model config configs/model_tiny.json; resumed
+- Step 2101 of 3000 (stopped early (resume later)); best validation loss 2.6747; total training time 31 s
+
+## 2026-11-14 18:42 | home | Day 9 train smoke_c
+
+- Machine label: home; device: NVIDIA GeForce RTX 4060 Laptop GPU; precision: bf16
+- Script: scripts/day9_train.py (day9-v1); PyTorch 2.15.0+cu132
+- Run: runs/day9/smoke_c; model config configs/model_tiny.json; resumed
+- Step 3000 of 3000 (finished); best validation loss 2.6747; total training time 44 s
