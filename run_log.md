@@ -150,3 +150,12 @@ Report only what is written here.
 - medium_d00: best val 2.7115 at step 100, final 3.2308
 - medium_d10: best val 2.6812 at step 75, final 3.1458
 - Decision: small_d10 (small_d10 has the lowest validation loss (2.6351))
+
+## 2026-11-18 12:58 | home | Day 12 main training
+
+- Script: scripts/day12_train_main.py (day12-v1); NVIDIA GeForce RTX 4060 Laptop GPU; PyTorch 2.15.0+cu132
+- Configuration: tiny, dropout 0.1; 400-step schedule, patience 100
+- main_s42: best val 2.6430 at step 130; early_stopped at step 230
+- main_s43: best val 2.6221 at step 120; early_stopped at step 220
+- main_s44: best val 2.5935 at step 140; early_stopped at step 240
+- Mean 2.6195, spread 0.0495; final model runs/day12/main_s44/best.pt

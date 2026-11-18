@@ -96,3 +96,38 @@
   Lowest overall: <run></run> <x.xxxx>. Observations: <e.g. larger models reached their best earlier and rose more;
   dropout reduced the rise after best by ...>.
 - Day 12 trains the chosen configuration (configs/day11_decision.json).
+
+## D11. Model size (Day 11, 2026-11-18)
+
+- Trials: tiny / small / medium x dropout 0.0 / 0.1, 800 steps, batch 32 x 256, lr 1e-3, validation every 25 steps.
+  Seed 42: all six runs; seed 43: tiny and small (check of run-to-run noise).
+- All runs reach validation perplexity ~14 at their best (steps 75-225) and overfit after; medium (15x tiny) is
+  no better: the amount of data, not the model size, limits the result. Dropout helped small and medium.
+- Pre-set rule (tolerance 0.02) chose small_d10 at seed 42 and tiny_d10 at seed 43. Measured seed noise is up to
+  0.062, so the 0.02 tolerance was too small: tiny and small are equal within noise.
+- Decision: tiny_d10 (tiny, dropout 0.1, 1.0M parameters): smaller and faster, later best step, correct units for
+  勤続年数 in its samples, highest distinct-2. Two-seed means: small_d10 2.6432, tiny_d10 2.6637.
+- Lesson: compare configurations over several seeds; a single run cannot separate differences smaller than ~0.06.
+
+## D12. Main model (Day 12)
+
+- Configuration from D11 (tiny, dropout 0.1), 400-step schedule (warm-up 60, lr 1e-3, cosine to 10 %),
+  validation every 10 steps, early stopping after 100 steps without improvement, seeds 42 / 43 / 44.
+- Best validation loss per seed: <x.xxxx> / <x.xxxx> / <x.xxxx> (mean <x.xxxx>, spread <x.xxxx>).
+  Each run ended: <early_stopped at step n / finished>.
+- Compared with the Day 11 trials (800 steps, mean 2.6637): change <+/-x.xxxx>, <inside / outside> the seed spread.
+- Final model: runs/day12/main_s<seed></seed>/best.pt (lowest validation loss; passes the task 6 checks).
+  Recorded in configs/day12_final.json. The test set was not used; it is kept for Day 13.
+
+## D12. Main model (Day 12)
+
+- Configuration from D11 (tiny, dropout 0.1), 400-step schedule (warm-up 60, lr 1e-3, cosine to 10 %),
+  validation every 10 steps, early stopping after 100 steps without improvement, seeds 42 / 43 / 44.
+- Best validation loss per seed: 2.6430 / 2.6221 / 2.5935 (mean 2.6195, spread 0.0495).
+  All three early-stopped (steps 230 / 220 / 240); best points at steps 130 / 120 / 140.
+- Compared with the Day 11 trials (800 steps, mean 2.6637): change -0.0441, inside the seed spread,
+  so not proven. Same-seed pairs both improved (seed 42: -0.0446, seed 43: -0.0176): probably a small gain.
+- Final model: runs/day12/main_s44/best.pt (validation loss 2.5935, perplexity 13.38, step 140;
+  finished 100 %, repetitive 0 %, distinct-2 0.44). Recorded in configs/day12_final.json.
+- Observed in samples: unit mix-ups (勤続年数 followed by 万円) and broken numbers; to be counted in Day 13.
+- The test set was not used; it is kept for Day 13.

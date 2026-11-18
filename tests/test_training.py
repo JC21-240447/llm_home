@@ -148,3 +148,44 @@ def test_resume_after_a_hard_kill_removes_lines_written_after_the_checkpoint(tmp
     cfg.resume, cfg.stop_after = True, None
     train(cfg, tmp_path)
     assert _losses(tmp_path, "a") == _losses(tmp_path, "e")
+
+
+def _make_diverging_repo(root: Path) -> None:
+    """Training text uses only token IDs 4-9, validation only 20-39: learning the training text makes validation
+    worse, so the validation loss is sure to rise and early stopping must trigger."""
+    rng = np.random.default_rng(1)
+    tok_dir = root / "data/tokens"
+    for split, lo, hi, n in (("train", 4, 10, 300), ("val", 20, 40, 40)):
+        lines = [" ".join(map(str, rng.integers(lo, hi, size=8))) for _ in range(n)]
+        tokens, offsets = encode_lines(lines, lambda s: [int(t) for t in s.split()], 1, 2)
+        meta = TokenFileMeta(FORMAT_VERSION, split, VOCAB, "test", 1, 2, len(lines), len(tokens),
+                             sha256_bytes(tokens.tobytes()), "test")
+        write_token_files(tok_dir, split, tokens, offsets, meta)
+    (root / "configs").mkdir()
+    ModelConfig(vocab_size=VOCAB, block_size=16, n_layer=2, n_head=2, d_model=32, name="test").save(
+        root / "configs/model_test.json")
+
+
+def test_early_stopping_ends_the_run_and_keeps_the_best(tmp_path: Path) -> None:
+    """Day 12: with a patience, training stops once validation has not improved for that many steps."""
+    _make_diverging_repo(tmp_path)
+    res = train(_cfg("f", max_steps=60, eval_every=2, lr=1e-2, early_stop_patience=6), tmp_path)
+    status = json.loads((tmp_path / "runs/f/status.json").read_text(encoding="utf-8"))
+    assert res["early_stopped"] and status["status"] == "early_stopped"
+    assert res["step"] < 60 and res["step"] - res["best_step"] >= 6
+    _, val = _losses(tmp_path, "f")
+    assert float(val[res["best_step"]]) == pytest.approx(res["best_val"], abs=1e-4)
+    assert min(float(v) for v in val.values()) == pytest.approx(res["best_val"], abs=1e-4)
+
+
+def test_early_stopping_survives_stop_and_resume(tmp_path: Path) -> None:
+    """The best step is saved in the checkpoint, so a resumed run stops at the same step as a non-stop run."""
+    _make_diverging_repo(tmp_path)
+    full = train(_cfg("g", max_steps=60, eval_every=2, lr=1e-2, early_stop_patience=6), tmp_path)
+    train(_cfg("h", max_steps=60, eval_every=2, lr=1e-2, early_stop_patience=6, stop_after=full["step"] - 3),
+          tmp_path)
+    cfg = TrainConfig.from_dict(json.loads((tmp_path / "runs/h/train_config.json").read_text(encoding="utf-8")))
+    cfg.resume, cfg.stop_after = True, None
+    resumed = train(cfg, tmp_path)
+    assert (resumed["step"], resumed["best_step"]) == (full["step"], full["best_step"])
+    assert _losses(tmp_path, "g") == _losses(tmp_path, "h")

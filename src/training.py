@@ -18,6 +18,10 @@ the random states and the batch generator state. A resumed run therefore uses th
 same batches and learning rates as an uninterrupted one, and the loss curve
 continues without a jump.
 
+Early stopping (Day 12, optional): with early_stop_patience = N, training ends when the
+validation loss has not improved for N steps; best.pt keeps the best model. status.json
+records how the run ended: finished, early_stopped, or stopped (Ctrl+C, resume later).
+
 Stopping safely: Ctrl+C (once) finishes the current step, saves last.pt and exits.
 Checkpoints are written to a temporary file first and then renamed, so an
 interruption during saving never leaves a broken last.pt.
@@ -90,6 +94,7 @@ class TrainConfig:
     device: str = "auto"
     seed: int = 42
     stop_after: int | None = None         # stop at this step (simulates an interruption)
+    early_stop_patience: int | None = None  # Day 12: stop when validation has not improved for this many steps
     resume: bool = False
     overwrite: bool = False
     machine: str = "home"
@@ -289,7 +294,7 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
         if run_dir.exists() and any(run_dir.iterdir()) and not cfg.overwrite:
             raise SystemExit(f"{run_dir} already has files. Use a new --run-name, --resume, or --overwrite.")
         run_dir.mkdir(parents=True, exist_ok=True)
-        for p in (last_path, best_path, log_path, samples_path):
+        for p in (last_path, best_path, log_path, samples_path, run_dir / "status.json"):
             p.unlink(missing_ok=True)
         (run_dir / "train_config.json").write_text(json.dumps(cfg.to_dict(), indent=2, ensure_ascii=False),
                                                    encoding="utf-8", newline="\n")
@@ -305,6 +310,7 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
     windows = RandomWindows(train_tokens, mcfg.block_size, cfg.batch_size, cfg.seed)
 
     step, best_val, elapsed_before, tokens_seen = 0, float("inf"), 0.0, 0
+    best_step = 0
     if cfg.resume:
         st = load_checkpoint(last_path, device)
         if st["model_config"] != mcfg.to_dict():
@@ -317,6 +323,7 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
         if device.type == "cuda" and st.get("cuda_rng") is not None:
             torch.cuda.set_rng_state_all([s.cpu() for s in st["cuda_rng"]])
         step, best_val = st["step"], st["best_val"]
+        best_step = st.get("best_step", step)
         elapsed_before, tokens_seen = st["elapsed_s"], st["tokens_seen"]
         _truncate_after(log_path, samples_path, step)
         print(f"Resumed from {last_path.name} at step {step} (best validation loss so far {best_val:.4f})")
@@ -336,7 +343,7 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
             "format": CHECKPOINT_FORMAT, "step": step, "model": model.state_dict(), "optimizer": opt.state_dict(),
             "scaler": scaler.state_dict(), "windows": windows.state_dict(), "torch_rng": torch.get_rng_state(),
             "cuda_rng": torch.cuda.get_rng_state_all() if device.type == "cuda" else None,
-            "model_config": mcfg.to_dict(), "train_config": cfg.to_dict(), "best_val": best_val,
+            "model_config": mcfg.to_dict(), "train_config": cfg.to_dict(), "best_val": best_val, "best_step": best_step,
             "elapsed_s": elapsed_before + (time.perf_counter() - t_start), "tokens_seen": tokens_seen,
             "tokenizer_sha256": train_meta.tokenizer_sha256, "torch_version": str(torch.__version__),
             "python_version": platform.python_version(),
@@ -361,10 +368,12 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
         log_f.flush()
 
     def checkpoint_and_sample(lr: float) -> float:
-        nonlocal best_val
+        nonlocal best_val, best_step
         val = evaluate(model, val_tokens, mcfg.block_size, cfg.batch_size, device, precision, cfg.eval_max_windows)
         improved = val < best_val
         best_val = min(best_val, val)
+        if improved:
+            best_step = step
         write_row("eval", lr, None, val, None, None)
         if tok is not None and cfg.prompts:
             lines = [f"\n## step {step} (validation loss {val:.4f})\n", "| Prompt | Greedy continuation |",
@@ -388,6 +397,7 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
     interval_loss = torch.zeros((), device=device)
     interval_steps, interval_t0 = 0, time.perf_counter()
     stopped_early = False
+    early_stopped = False
     last_lr = cfg.lr
     try:
         with _StopFlag() as stop:
@@ -446,9 +456,20 @@ def train(cfg: TrainConfig, repo_root: Path) -> dict:
                     stopped_early = True
                     print(f"Stopped at step {step}. Continue with --resume.")
                     break
+                if (cfg.early_stop_patience is not None and step % cfg.eval_every == 0 and step < cfg.max_steps
+                        and step - best_step >= cfg.early_stop_patience):
+                    early_stopped = True
+                    print(f"Early stop at step {step}: no improvement for {step - best_step} steps "
+                          f"(best validation loss {best_val:.4f} at step {best_step}; best.pt keeps it).")
+                    break
     finally:
         log_f.close()
 
+    status = "stopped" if stopped_early else ("early_stopped" if early_stopped else "finished")
+    (run_dir / "status.json").write_text(json.dumps({"status": status, "step": step, "best_step": best_step,
+                                                      "best_val": best_val}, indent=2) + "\n",
+                                         encoding="utf-8", newline="\n")
     return {"run_dir": str(run_dir), "step": step, "max_steps": cfg.max_steps, "best_val": best_val,
+            "best_step": best_step, "early_stopped": early_stopped, "status": status,
             "stopped_early": stopped_early, "device": device_name, "precision": precision, "last_lr": last_lr,
             "elapsed_s": elapsed_before + time.perf_counter() - t_start}

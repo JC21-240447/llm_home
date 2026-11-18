@@ -1,0 +1,25 @@
+{
+  "final_checkpoint": "runs/day12/main_s44/best.pt",
+  "run": "main_s44",
+  "size": "tiny",
+  "dropout": 0.1,
+  "model_config": "configs/model_tiny.json",
+  "parameters": 1001856,
+  "best_val": 2.5935,
+  "best_step": 140,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "best_val_per_seed": [
+    2.643,
+    2.6221,
+    2.5935
+  ],
+  "mean_best_val": 2.6195,
+  "spread": 0.0495,
+  "test_set_used": false,
+  "decided": "2026-11-18 12:58",
+  "script": "day12-v1"
+}

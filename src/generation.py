@@ -286,3 +286,19 @@ def distinct_2(all_ids: Sequence[Sequence[int]]) -> float:
 
 def perplexity_of(loss: float) -> float:
     return math.exp(loss)
+
+
+def quick_checks(logits_fn: LogitsFn, tok: ByteBPETokenizer, prompts: Sequence[str], cfg: SamplingConfig,
+                 train_set: set[str] | None = None) -> dict:
+    """Task 6 automatic items on a list of prompts (Day 11/12): finished (A2), repetitive (A3), distinct-2 (A4),
+    new sentences (A5, reference), and the generated texts."""
+    gens = [generate(logits_fn, tok, p, cfg) for p in prompts]
+    n = max(1, len(gens))
+    body = [[i for i in g.ids if i != EOS_ID] for g in gens]
+    return {
+        "finished": sum(g.finished for g in gens) / n,
+        "repetitive": sum(is_repetitive(tok.encode(g.prompt) + b) for g, b in zip(gens, body)) / n,
+        "distinct2": distinct_2(body),
+        "new": None if train_set is None else sum((g.prompt + g.text) not in train_set for g in gens if g.finished),
+        "texts": {g.prompt: g.text + (" ⟨eos⟩" if g.finished else " …") for g in gens},
+    }
