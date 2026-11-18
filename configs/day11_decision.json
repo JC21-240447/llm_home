@@ -1,0 +1,18 @@
+{
+  "chosen_run": "tiny_d10",
+  "size": "tiny",
+  "dropout": 0.1,
+  "model_config": "configs/model_tiny.json",
+  "parameters": 1001856,
+  "best_val_seed42": 2.6876,
+  "best_val_seed43": 2.6397,
+  "best_val_mean": 2.6637,
+  "best_step_seed42": 125,
+  "best_step_seed43": 225,
+  "tokens_per_step": 8192,
+  "trial_steps": 800,
+  "measured_seed_noise": 0.062,
+  "reason": "Seed check (42 vs 43) showed run-to-run noise up to 0.062, larger than the 0.02 tolerance and than the differences between sizes; tiny and small are equal within noise, so the smaller model is chosen. tiny_d10: lowest tiny mean, correct units for 勤続年数, highest distinct-2, later best step.",
+  "decided": "2026-11-18",
+  "script": "day11-v1 trials (seeds 42, 43) + documented decision"
+}

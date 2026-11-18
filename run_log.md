@@ -138,3 +138,15 @@ Report only what is written here.
 - Script: scripts/day10_generate.py (day10-v1); device NVIDIA GeForce RTX 4060 Laptop GPU; PyTorch 2.15.0+cu132
 - Run runs/day9/smoke_a: best.pt step 200, last.pt step 600
 - Prompts: prompts/day10_prompts.txt (12); settings: greedy, greedy+limits, sample, sample-hot; report docs/DAY10_GENERATION_REPORT.md
+
+## 2026-11-18 12:12 | home | Day 11 size trials
+
+- Script: scripts/day11_size_trials.py (day11-v1); NVIDIA GeForce RTX 4060 Laptop GPU; PyTorch 2.15.0+cu132
+- Trials: tiny_d00, tiny_d10, small_d00, small_d10, medium_d00, medium_d10; 800 steps each, batch 32 x 256
+- tiny_d00: best val 2.6692 at step 150, final 3.0357
+- tiny_d10: best val 2.6876 at step 125, final 3.0233
+- small_d00: best val 2.7155 at step 75, final 3.0298
+- small_d10: best val 2.6351 at step 75, final 3.2218
+- medium_d00: best val 2.7115 at step 100, final 3.2308
+- medium_d10: best val 2.6812 at step 75, final 3.1458
+- Decision: small_d10 (small_d10 has the lowest validation loss (2.6351))

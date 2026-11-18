@@ -85,3 +85,14 @@
 - Findings: last.pt (step 600) uses company terms better than best.pt (step 200); T 1.5 breaks text;
   out-of-scope beginnings are turned into company questions.
 - Task 6 item A3 corrected to "5+ same tokens in a row" (4 in a row occurs in real questions).
+
+## D11. Model size (Day 11)
+
+- Trials: tiny / small / medium x dropout 0.0 / 0.1, same budget (800 steps, batch 32 x 256, lr 1e-3, seed 42),
+  validation every 25 steps; best checkpoints checked on the 12 Day 10 prompts.
+- Rule (fixed before the trials): pass task 6 checks (finished >= 90 %, repetitive <= 5 %); within 0.02 of the
+  lowest validation loss, choose the fewest parameters.
+- Result: chosen <run></run> (<size></size>, dropout <d></d>), best validation loss <x.xxxx> at step <n></n>.
+  Lowest overall: <run></run> <x.xxxx>. Observations: <e.g. larger models reached their best earlier and rose more;
+  dropout reduced the rise after best by ...>.
+- Day 12 trains the chosen configuration (configs/day11_decision.json).

@@ -1,0 +1,15 @@
+{
+  "chosen_run": "tiny_d10",
+  "size": "tiny",
+  "dropout": 0.1,
+  "model_config": "configs/model_tiny.json",
+  "parameters": 1001856,
+  "best_val": 2.6397,
+  "best_step": 225,
+  "tokens_per_step": 8192,
+  "trial_steps": 800,
+  "tolerance": 0.02,
+  "reason": "tiny_d10 has the lowest validation loss (2.6397) and is also the smallest of the runs within the tolerance",
+  "decided": "2026-11-18 12:18",
+  "script": "day11-v1"
+}
