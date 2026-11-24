@@ -1,0 +1,806 @@
+{
+ "final_checkpoint": "runs/day12/main_s44/best.pt",
+ "shuffle_seed": 13,
+ "rows": [
+  {
+   "id": "S001",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "年代ごとの",
+   "text": "数の平均を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S002",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "住宅手当が",
+   "text": "40万円未満の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S003",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "年齢が一番",
+   "text": "く社員の氏名と氏名を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S004",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "平均年収が",
+   "text": "40万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S005",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "月収が最も低い人の",
+   "text": "氏名と氏名を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S006",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "大阪支社で",
+   "text": "働く社員の残業時間の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S007",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "勤務地ごとの",
+   "text": "基本給の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S008",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "何人",
+   "text": "いますか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S009",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "月収が最も低い人の",
+   "text": "氏名と勤務地を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S010",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "一番",
+   "text": "が10年以下の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S011",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "一番",
+   "text": "が100022の人は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S012",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "製造部門を除いて、",
+   "text": "が高いですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S013",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "月平均残業時間が",
+   "text": "30%超の社員を出して。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S014",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "横浜事業所の",
+   "text": "社員を賞与が低い順に教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S015",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "部署ごとに",
+   "text": "数えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S016",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "住宅手当が",
+   "text": "300万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S017",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "営業部の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S018",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "有給取得率が",
+   "text": "40年以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S019",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "勤続年数が",
+   "text": "300万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S020",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "基本給が",
+   "text": "300万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S021",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "経理部の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S022",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "総務部の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S023",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "東京本社の",
+   "text": "社員を除いた昇給の順位を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S024",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "札幌支社で",
+   "text": "管理職手当が高い社員は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S025",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "東京本社の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S026",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "開発部の男性で",
+   "text": "年俸が最も高い人は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S027",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "社員全体の",
+   "text": "氏名と部署を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S028",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "ボーナスが",
+   "text": "350万円以上の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S029",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "勤続年数が一番",
+   "text": "が10万円以上の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S030",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "年齢が",
+   "text": "300万円以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S031",
+   "method": "greedy+limits",
+   "kind": "key_term",
+   "prompt": "社歴が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S032",
+   "method": "greedy+limits",
+   "kind": "out_of_scope",
+   "prompt": "駅までの",
+   "text": "人を教えてください。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S033",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "平均年収が",
+   "text": "30万円超の部署を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S034",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "何人",
+   "text": "いますか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S035",
+   "method": "sample",
+   "kind": "key_term",
+   "prompt": "残業代が",
+   "text": "60万円以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S036",
+   "method": "sample",
+   "kind": "key_term",
+   "prompt": "社歴が",
+   "text": "35万円未満の社員を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S037",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "ボーナスの中央値を",
+   "text": "出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S038",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "勤続年数が",
+   "text": "30万円以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S039",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "年収が",
+   "text": "最も低い社員のうち、働く社員の総合評価の最低額を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S040",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "年齢が一番",
+   "text": "してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S041",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "営業部の",
+   "text": "社員を在籍年数が低い順に一覧にして。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S042",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "月収が",
+   "text": "350万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S043",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "部署ごとに",
+   "text": "働く社員の有給消化率の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S044",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "ボーナスが",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S045",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "開発部の男性で",
+   "text": "働く社員の残業時間の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S046",
+   "method": "greedy+limits",
+   "kind": "out_of_scope",
+   "prompt": "好きな食べ物は",
+   "text": "？",
+   "out_of_scope": true
+  },
+  {
+   "id": "S047",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "年齢が",
+   "text": "40%未満の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S048",
+   "method": "greedy+limits",
+   "kind": "key_term",
+   "prompt": "有休取得率が",
+   "text": "300万円以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S049",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "人事部の",
+   "text": "社員の住宅手当の平均を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S050",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "札幌支社で",
+   "text": "働く社員の残業時間の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S051",
+   "method": "greedy+limits",
+   "kind": "out_of_scope",
+   "prompt": "明日の",
+   "text": "社員を教えてください。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S052",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "製造部門を除いて、",
+   "text": "。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S053",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "男女別の",
+   "text": "社員のうち、残業時間が3000年以下の人は何人いますか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S054",
+   "method": "sample",
+   "kind": "key_term",
+   "prompt": "賞与が",
+   "text": "700万円未満の社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S055",
+   "method": "greedy+limits",
+   "kind": "key_term",
+   "prompt": "残業代が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S056",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "社員全体の",
+   "text": "年間給与の順位を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S057",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "基本給が",
+   "text": "600万円以上の社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S058",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "開発部の",
+   "text": "社員の名前と総合評価を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S059",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "ボーナスの中央値を",
+   "text": "出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S060",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "経理部の",
+   "text": "社員を勤務地ごとに出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S061",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "年収が一番",
+   "text": "い社員は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S062",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "福岡支社の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S063",
+   "method": "greedy+limits",
+   "kind": "key_term",
+   "prompt": "年俸が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S064",
+   "method": "greedy+limits",
+   "kind": "key_term",
+   "prompt": "賞与が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S065",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "年収が一番",
+   "text": "く社員の氏名と氏名を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S066",
+   "method": "greedy+limits",
+   "kind": "out_of_scope",
+   "prompt": "天気が",
+   "text": "高い社員は誰ですか。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S067",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "総務部の",
+   "text": "社員を除いた年俸の合計を出して。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S068",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "月収が",
+   "text": "350万円未満の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S069",
+   "method": "sample",
+   "kind": "key_term",
+   "prompt": "有休取得率が",
+   "text": "500万円超で、資格数が35年超の社員は何人いますか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S070",
+   "method": "greedy+limits",
+   "kind": "out_of_scope",
+   "prompt": "今日は",
+   "text": "何人いますか。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S071",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "社員全体に",
+   "text": "入社した社員は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S072",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "有給取得率が",
+   "text": "300万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S073",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "年代ごとの",
+   "text": "住宅手当の最低額を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S074",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "福岡支社の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S075",
+   "method": "sample",
+   "kind": "out_of_scope",
+   "prompt": "駅までの",
+   "text": "人は誰ですか。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S076",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "年収が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S077",
+   "method": "sample",
+   "kind": "key_term",
+   "prompt": "年俸が",
+   "text": "500時間以下の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S078",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "営業部に係長は",
+   "text": "誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S079",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "開発部の",
+   "text": "社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S080",
+   "method": "sample",
+   "kind": "count_rank",
+   "prompt": "役職ごとの",
+   "text": "勤続年数の中央値を出して。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S081",
+   "method": "sample",
+   "kind": "out_of_scope",
+   "prompt": "天気が",
+   "text": "高い順に一覧にして。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S082",
+   "method": "sample",
+   "kind": "dept",
+   "prompt": "大阪支社で",
+   "text": "働く社員の社歴の差を出して。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S083",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "人事部の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S084",
+   "method": "sample",
+   "kind": "out_of_scope",
+   "prompt": "好きな食べ物は",
+   "text": "？",
+   "out_of_scope": true
+  },
+  {
+   "id": "S085",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "役職ごとの",
+   "text": "月収の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S086",
+   "method": "sample",
+   "kind": "item",
+   "prompt": "保有資格数が",
+   "text": "50万円以下の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S087",
+   "method": "greedy+limits",
+   "kind": "dept",
+   "prompt": "横浜事業所の",
+   "text": "社員を一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S088",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "月平均残業時間が",
+   "text": "300万円以上の社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S089",
+   "method": "sample",
+   "kind": "out_of_scope",
+   "prompt": "今日は",
+   "text": "何人いますか。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S090",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "社員全体に",
+   "text": "所属する社員は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S091",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "勤務地ごとの",
+   "text": "月収の中央値を出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S092",
+   "method": "greedy+limits",
+   "kind": "item",
+   "prompt": "保有資格数が",
+   "text": "30000100万円未満の社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S093",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "営業部に係長は",
+   "text": "誰月額給与が低い社員は誰ですか。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S094",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "男女別の",
+   "text": "社員を教えてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S095",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "セールス部の既婚者の",
+   "text": "社員は？",
+   "out_of_scope": false
+  },
+  {
+   "id": "S096",
+   "method": "greedy+limits",
+   "kind": "count_rank",
+   "prompt": "勤続年数が一番",
+   "text": "く社員の氏名と氏名を見せてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S097",
+   "method": "sample",
+   "kind": "out_of_scope",
+   "prompt": "明日の",
+   "text": "社員を教えてください。",
+   "out_of_scope": true
+  },
+  {
+   "id": "S098",
+   "method": "sample",
+   "kind": "unseen",
+   "prompt": "部門ごとの年間給与の順位を",
+   "text": "一覧にしてください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S099",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "部門ごとの年間給与の順位を",
+   "text": "出してください。",
+   "out_of_scope": false
+  },
+  {
+   "id": "S100",
+   "method": "greedy+limits",
+   "kind": "unseen",
+   "prompt": "セールス部の既婚者の",
+   "text": "社員を出してください。",
+   "out_of_scope": false
+  }
+ ]
+}

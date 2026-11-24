@@ -131,3 +131,16 @@
   finished 100 %, repetitive 0 %, distinct-2 0.44). Recorded in configs/day12_final.json.
 - Observed in samples: unit mix-ups (勤続年数 followed by 万円) and broken numbers; to be counted in Day 13.
 - The test set was not used; it is kept for Day 13.
+
+## D13. Final evaluation (Day 13, completes task 11)
+
+- Final model runs/day12/main_s44/best.pt, evaluated with the task 6 criteria (unchanged).
+- A1 test perplexity <x.xx> (validation <x.xx>); untrained <n></n>; bigram counting baseline <x.xx>.
+  The test text was used here for the first time.
+- 50 fixed beginnings x 2 methods: finished <x></x> % / <x></x> %, repetitive <x></x> % / <x></x> %, distinct-2 <x.xx> / <x.xx>.
+  Extra checks (0 false alarms on the real test questions): wrong unit <x></x> % / <x></x> %, broken number <x></x> % / <x></x> %,
+  unseen value <x></x> % / <x></x> %. last.pt: wrong unit <x></x> % / <x></x> %, copy <x></x> % / <x></x> %.
+- Human scoring (<n></n> scorers, 100 outputs, method hidden): H1 <x.xx>, H2 <x.xx>, H3 <x.xx>, H4 <x.xx>;
+  H3 <= 2: <x></x> %; agreement within 1 point <x></x>-<x></x> %, kappa <x.xx>-<x.xx>.
+- <N></n> of <M></m> guidelines met. Main weakness: <e.g. item + unit combinations (wrong unit x %, H4 x.xx)>.
+- Task 11 complete.

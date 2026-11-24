@@ -1,0 +1,158 @@
+{
+ "script": "day13-v1",
+ "date": "2026-11-19 01:12",
+ "machine": "home",
+ "device": "NVIDIA GeForce RTX 4060 Laptop GPU",
+ "final": {
+  "final_checkpoint": "runs/day12/main_s44/best.pt",
+  "run": "main_s44",
+  "size": "tiny",
+  "dropout": 0.1,
+  "model_config": "configs/model_tiny.json",
+  "parameters": 1001856,
+  "best_val": 2.5935,
+  "best_step": 140,
+  "seeds": [
+   42,
+   43,
+   44
+  ],
+  "best_val_per_seed": [
+   2.643,
+   2.6221,
+   2.5935
+  ],
+  "mean_best_val": 2.6195,
+  "spread": 0.0495,
+  "test_set_used": false,
+  "decided": "2026-11-18 12:58",
+  "script": "day12-v1"
+ },
+ "a1": {
+  "uniform": {
+   "label": "Uniform guessing (every token equally likely)",
+   "val": 7.422971251049421,
+   "test": 7.422971251049421
+  },
+  "untrained": {
+   "label": "Untrained model (same size, random weights)",
+   "val": 7.43731555111332,
+   "test": 7.419677607984428
+  },
+  "bigram": {
+   "label": "Counting baseline: bigram (previous token only, weight 0.9 chosen on validation)",
+   "val": 2.96466405642745,
+   "test": 2.5538322386973347
+  },
+  "best.pt": {
+   "label": "Final model best.pt (step 140)",
+   "val": 2.5935340363141064,
+   "test": 2.429414465724225,
+   "step": 140
+  },
+  "last.pt": {
+   "label": "Final model last.pt (step 240)",
+   "val": 2.697464036070593,
+   "test": 2.496115857817562,
+   "step": 240
+  }
+ },
+ "other_seeds": {
+  "main_s42": {
+   "val": 2.6430278967504632,
+   "test": 2.439977633426467,
+   "step": 130
+  },
+  "main_s43": {
+   "val": 2.6220831272264595,
+   "test": 2.4117122261399726,
+   "step": 120
+  }
+ },
+ "generation": {
+  "best.pt|greedy+limits": {
+   "finished": 1.0,
+   "repetitive": 0.0,
+   "distinct2": 0.19817073170731708,
+   "copy": 0.04,
+   "wrong_unit": 0.14,
+   "broken_number": 0.14,
+   "unseen_value": 0.3
+  },
+  "best.pt|sample": {
+   "finished": 1.0,
+   "repetitive": 0.0,
+   "distinct2": 0.3784530386740331,
+   "copy": 0.0,
+   "wrong_unit": 0.18,
+   "broken_number": 0.0,
+   "unseen_value": 0.16
+  },
+  "last.pt|greedy+limits": {
+   "finished": 1.0,
+   "repetitive": 0.0,
+   "distinct2": 0.21614583333333334,
+   "copy": 0.1,
+   "wrong_unit": 0.08,
+   "broken_number": 0.02,
+   "unseen_value": 0.04
+  },
+  "last.pt|sample": {
+   "finished": 1.0,
+   "repetitive": 0.0,
+   "distinct2": 0.4213075060532688,
+   "copy": 0.12,
+   "wrong_unit": 0.14,
+   "broken_number": 0.0,
+   "unseen_value": 0.14
+  }
+ },
+ "calibration": {
+  "questions": 4553,
+  "wrong_unit": 0,
+  "broken_number": 0,
+  "unseen_value": 0,
+  "digit_limit": 6,
+  "items_learned": 45
+ },
+ "prompt_counts": {
+  "dept": 10,
+  "item": 10,
+  "count_rank": 10,
+  "unseen": 10,
+  "key_term": 5,
+  "out_of_scope": 5
+ },
+ "unseen_never_in_training": 10,
+ "methods": {
+  "greedy+limits": {
+   "method": "greedy",
+   "temperature": 1.0,
+   "top_k": 0,
+   "top_p": 1.0,
+   "repetition_penalty": 1.0,
+   "max_run": 4,
+   "max_trigram_repeats": 2,
+   "max_new_tokens": 40,
+   "seed": 42,
+   "name": "greedy+limits"
+  },
+  "sample": {
+   "method": "sample",
+   "temperature": 0.8,
+   "top_k": 50,
+   "top_p": 0.95,
+   "repetition_penalty": 1.0,
+   "max_run": 4,
+   "max_trigram_repeats": 2,
+   "max_new_tokens": 40,
+   "seed": 42,
+   "name": "sample"
+  }
+ },
+ "scored_outputs": 100,
+ "guidelines": {
+  "min_finished": 0.9,
+  "max_repetitive": 0.05
+ }
+}

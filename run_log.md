@@ -159,3 +159,19 @@ Report only what is written here.
 - main_s43: best val 2.6221 at step 120; early_stopped at step 220
 - main_s44: best val 2.5935 at step 140; early_stopped at step 240
 - Mean 2.6195, spread 0.0495; final model runs/day12/main_s44/best.pt
+
+## 2026-11-19 01:12 | home | Day 13 final automatic evaluation
+
+- Script: scripts/day13_final_eval.py (day13-v1); NVIDIA GeForce RTX 4060 Laptop GPU; PyTorch 2.15.0+cu132
+- Final model runs/day12/main_s44/best.pt: test loss 2.4294 (perplexity 11.35); bigram baseline test 12.86
+- best.pt|greedy+limits: finished 100%, repetitive 0%, wrong unit 14%
+- best.pt|sample: finished 100%, repetitive 0%, wrong unit 18%
+- last.pt|greedy+limits: finished 100%, repetitive 0%, wrong unit 8%
+- last.pt|sample: finished 100%, repetitive 0%, wrong unit 14%
+- Scoring sheet: 100 outputs (docs/day13/scoring_sheet.xlsx)
+
+## 2026-11-24 08:48 | Day 13 human scoring summary
+
+- Script: scripts/day13_score_summary.py (day13-v1); scorers: 6
+- H1-H4 (both methods): H1 4.59, H2 4.23, H3 3.54, H4 3.66; H3<=2: 22%
+- Agreement within 1 point: H1 90%, H2 88%, H3 78%, H4 77%
